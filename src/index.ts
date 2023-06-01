@@ -1,2 +1,8 @@
+// Libs
+import ReportService from "./services/reportService";
+
 // Code
-console.info("hello world");
+const cardsIds = process.env.CARDS_IDS!.split(";");
+for (const cardId of cardsIds) {
+  const report = ReportService.createReport(cardId);
+}
