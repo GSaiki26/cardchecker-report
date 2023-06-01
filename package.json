@@ -7,14 +7,14 @@
   "scripts": {
     "build": "tsc >> /dev/null; mkdir dist/proto; yarn run proto",
     "check-linter": "prettier --check ./src",
-    "dev:proto": "grpc_tools_node_protoc --plugin ./node_modules/.bin/protoc-gen-ts --ts_out ./src/proto --grpc_out grpc_js:./src/proto --js_out import_style:commonjs:./src/proto -I ./src/proto ./src/proto*.proto",
-    "proto": "grpc_tools_node_protoc --grpc_out grpc_js:./dist/proto --js_out import_style:commonjs:./dist/proto -I ./src/proto ./src/proto*.proto",
+    "dev:proto": "grpc_tools_node_protoc --plugin ./node_modules/.bin/protoc-gen-ts --ts_out ./src/proto --grpc_out grpc_js:./src/proto --js_out import_style=commonjs:./src/proto -I ./src/proto ./src/proto/*.proto",
+    "proto": "grpc_tools_node_protoc --grpc_out grpc_js:./dist/proto --js_out import_style=commonjs:./dist/proto -I ./src/proto ./src/proto/*.proto",
     "start:prod": "node ."
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.8.14",
     "grpc-tools": "^1.12.4",
-    "node-mailer": "^0.1.1",
+    "nodemailer": "^6.9.3",
     "typescript": "^5.1.3",
     "winston": "^3.9.0",
     "xlsx": "^0.18.5"
