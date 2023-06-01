@@ -20,6 +20,7 @@ RUN yarn install --production
 # Copy the project
 COPY --chown=node ./tsconfig.json .
 COPY --chown=node ./src ./src
+RUN mkdir src/proto
 
 # Get the proto from the cardchecker api
 RUN wget "$CARDCHECKER_PROTO_URI" -O ./src/proto/cardchecker.proto
