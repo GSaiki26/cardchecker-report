@@ -1,0 +1,28 @@
+name: "Docker Build"
+
+on:
+  pull_request:
+    branches: [ master, develop ]
+  push:
+    branches: [ master ]
+
+jobs:
+  try-to-build:
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ ubuntu-22.04 ]
+        node-version: [ 19 ]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: action/checkout@v3
+      - uses: action/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Create examples environments.
+        run: cp report.env.example report.env; mkdir certs
+
+      - name: Try to build
+        run: docker build -t project .;
