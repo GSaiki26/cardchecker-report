@@ -5,6 +5,7 @@ import messages from "../proto/cardchecker_pb";
 
 import CardcheckerModel from "../models/cardcheckerModel";
 import LoggerModel from "../models/loggerModel";
+import ReportModel from "../models/reportModel";
 
 // Class
 class ReportService {
@@ -19,7 +20,10 @@ class ReportService {
     // Get the montly checks.
     const checks = await this.getMonthlyChecks(logger, cardId);
     if (!checks) return;
-    console.info(checks.toObject().dataList);
+
+    // Create the report.
+    const report = ReportModel.createReport(logger, checks);
+    if (!report) return;
   }
 
   /**
@@ -34,9 +38,11 @@ class ReportService {
     logger.info("Getting monthly checks...");
 
     // Create the time range.
-    const month = Number(process.env.MONTH_TARGET!);
-    const dateInit = new Date(new Date().getFullYear(), month, 1);
-    const dateEnd = new Date(new Date().getFullYear(), month + 1, 0);
+    const month = Number(process.env.TARGET_MONTH!) - 1;
+    const year = Number(process.env.TARGET_YEAR!);
+
+    const dateInit = new Date(year, month, 1);
+    const dateEnd = new Date(year, month + 1, 0);
 
     // Get the checks.
     return CardcheckerModel.getRange(logger, cardId, dateInit, dateEnd);
