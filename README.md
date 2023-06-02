@@ -1,4 +1,5 @@
 # Cardchecker Report
+[![Code quality](https://github.com/GSaiki26/cardchecker-report/actions/workflows/quality.yaml/badge.svg)](https://github.com/GSaiki26/cardchecker-report/actions/workflows/quality.yaml) [![Docker Build](https://github.com/GSaiki26/cardchecker-report/actions/workflows/build.yaml/badge.svg)](https://github.com/GSaiki26/cardchecker-report/actions/workflows/build.yaml) [![Security](https://github.com/GSaiki26/cardchecker-report/actions/workflows/security.yaml/badge.svg)](https://github.com/GSaiki26/cardchecker-report/actions/workflows/security.yaml)
 
 The cardchecker report is an application from the Cardchecker family (check the others cardchecker repos into my account). It's reponsible to send via nodemailer a report about the current month from all the stored checks in cardchecker api.
 
