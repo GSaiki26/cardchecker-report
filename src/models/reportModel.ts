@@ -20,15 +20,16 @@ class ReportModel {
     logger: Logger,
     checks: messages.GetRangeRes
   ): Workbook {
+    logger.info("Creating the report...");
     // Create the worksheet.
-    const date = `${Number(process.env.TARGET_MONTH) + 1}-${
-      process.env.TARGET_YEAR
-    }`;
     const wb = new Workbook();
-    const ws = wb.addWorksheet("Controle de Pontos " + date);
+    const ws = wb.addWorksheet(
+      `Controle de Pontos ${
+        new Date().getMonth() + 1
+      }.${new Date().getFullYear()}`
+    );
 
     // Create the table.
-    logger.info("Creating the table...");
     ws.addRow([
       "Data",
       "Dia da Semana",
@@ -43,6 +44,7 @@ class ReportModel {
     this.addChecksRowsToWorksheet(logger, ws, checks.toObject().dataList);
     this.formatTable(ws);
 
+    logger.info("The report was created.");
     return wb;
   }
 
@@ -59,13 +61,15 @@ class ReportModel {
   ): void {
     logger.info("Adding the checks in the table.");
     // Create the time range.
-    const month = Number(process.env.TARGET_MONTH!) - 1;
-    const year = Number(process.env.TARGET_YEAR!);
-    const monthDate = new Date(year, month, 1);
+    const monthDate = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth() - 1,
+      1
+    );
 
     // Add the rows by day from the month.
     const checksByDay = this.splitChecksByDay(checks);
-    while (monthDate.getMonth() == month) {
+    while (monthDate.getMonth() == new Date().getMonth() - 1) {
       // Add the checks from the day.
       const dayDate = new Date(monthDate.getTime());
       const row: (string | Date)[] = [dayDate, dayDate];
