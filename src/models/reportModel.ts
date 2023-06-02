@@ -79,7 +79,7 @@ class ReportModel {
       // Add empty times if row length isn\'t enough.
       while (row.length < 6) {
         row.push(
-          `${dayDate.getHours()}:${dayDate.getMinutes()}:${dayDate.getSeconds()}`
+          `00:00:00`
         );
       }
 
@@ -107,7 +107,6 @@ class ReportModel {
     const checksByDay: ChecksByDay = {};
     for (const check of checks) {
       const date = new Date(check.checktime);
-      date.setMinutes(-date.getTimezoneOffset());
       if (!(date.getDate() in checksByDay)) checksByDay[date.getDate()] = [];
       checksByDay[date.getDate()].push(
         `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
