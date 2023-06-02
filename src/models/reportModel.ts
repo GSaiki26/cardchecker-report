@@ -107,6 +107,7 @@ class ReportModel {
     const checksByDay: ChecksByDay = {};
     for (const check of checks) {
       const date = new Date(check.checktime);
+      date.setMinutes(-date.getTimezoneOffset());
       if (!(date.getDate() in checksByDay)) checksByDay[date.getDate()] = [];
       checksByDay[date.getDate()].push(
         `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
