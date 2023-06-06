@@ -80,9 +80,7 @@ class ReportModel {
 
       // Add empty times if row length isn\'t enough.
       while (row.length < 6) {
-        row.push(
-          `00:00:00`
-        );
+        row.push(`00:00:00`);
       }
 
       // Add the row into the excel file.
