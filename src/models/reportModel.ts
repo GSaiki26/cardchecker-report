@@ -23,6 +23,8 @@ class ReportModel {
     logger.info("Creating the report...");
     // Create the worksheet.
     const wb = new Workbook();
+    wb.properties.date1904 = true;
+
     const ws = wb.addWorksheet(
       `Controle de Pontos ${
         new Date().getMonth() + 1
@@ -78,9 +80,7 @@ class ReportModel {
 
       // Add empty times if row length isn\'t enough.
       while (row.length < 6) {
-        row.push(
-          `00:00:00`
-        );
+        row.push(`00:00:00`);
       }
 
       // Add the row into the excel file.
